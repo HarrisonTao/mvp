@@ -1,0 +1,2 @@
+rootProject.name='kitlinMVP'
+include ':app'
