@@ -2,9 +2,7 @@ package pattern.com.observer
 
 import com.google.gson.JsonParseException
 import io.reactivex.observers.DisposableObserver
-import okhttp3.ResponseBody
 import org.json.JSONException
-import pattern.com.base.HttpResponseData
 
 import pattern.com.view.BaseView
 import retrofit2.HttpException
@@ -16,9 +14,10 @@ import java.text.ParseException
 /**
  * 针对于对象解析返回操作
  */
-abstract class AnyBaseObserver<T> constructor(view:BaseView): DisposableObserver<HttpResponseData<T>>() {
+abstract class AnyBaseObserver<T> constructor(view:BaseView): DisposableObserver<T>() {
 
-    lateinit  var view:BaseView
+      var view:BaseView
+
 
     /**
      * 初始化赋值
@@ -26,6 +25,8 @@ abstract class AnyBaseObserver<T> constructor(view:BaseView): DisposableObserver
     init {
         this.view=view
     }
+
+
 
 
     /**
@@ -66,7 +67,7 @@ abstract class AnyBaseObserver<T> constructor(view:BaseView): DisposableObserver
         if(!isOpen){
             return;
         }
-        view.showLoading()
+        view .showLoading()
 
     }
 
@@ -80,13 +81,13 @@ abstract class AnyBaseObserver<T> constructor(view:BaseView): DisposableObserver
             return;
         }
 
-        view.hideLoading()
+        view .hideLoading()
 
     }
 
     override fun onError(e: Throwable) {
         if (view != null) {
-            view.hideLoading()
+            view .hideLoading()
         }
         if (e is HttpException) {
             //   HTTP错误
@@ -107,9 +108,9 @@ abstract class AnyBaseObserver<T> constructor(view:BaseView): DisposableObserver
             onException(PARSE_ERROR)
         } else {
             if (e != null) {
-                view.showError(e.toString())
+                view .showError(e.toString())
             } else {
-                view.showError("未知错误")
+                view .showError("未知错误")
             }
         }
     }
@@ -117,10 +118,10 @@ abstract class AnyBaseObserver<T> constructor(view:BaseView): DisposableObserver
 
      open fun onException(unknownError: Int) {
         when (unknownError) {
-            CONNECT_ERROR -> view.showError("连接错误")
-            CONNECT_TIMEOUT -> view.showError("连接超时")
-            BAD_NETWORK -> view.showError("网络问题")
-            PARSE_ERROR -> view.showError("解析数据失败")
+            CONNECT_ERROR ->  view .showError("连接错误")
+            CONNECT_TIMEOUT ->  view .showError("连接超时")
+            BAD_NETWORK ->  view .showError("网络问题")
+            PARSE_ERROR ->  view .showError("解析数据失败")
 
         }
     }
@@ -130,19 +131,14 @@ abstract class AnyBaseObserver<T> constructor(view:BaseView): DisposableObserver
      * @param t
      * the item emitted by the Observable
      */
-    override fun onNext(t: HttpResponseData<T>) {
-        if(t.code==0) {
-            onSuccess(t)
-        }else{
-            //把错误信息发送出去
-            view.showError(t.message)
-        }
+    override fun onNext(t: T) {
 
+            onSuccess(t)
     }
 
-    abstract fun onSuccess(data:HttpResponseData<T>)
+    abstract fun onSuccess(data:T)
 
-    
+
 
 }
 

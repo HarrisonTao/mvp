@@ -49,6 +49,7 @@ abstract class BaseActvity<P:BasePresenter<BaseView>>() : Activity() , BaseView 
     }
 
 
+
     /**
      * 错误提示框
      */

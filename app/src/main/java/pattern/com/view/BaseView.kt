@@ -1,6 +1,13 @@
 package pattern.com.view
 
+import pattern.com.base.City
+import pattern.com.base.HttpResponseData
+
 public interface BaseView {
+
+
+
+
 
     /**
      * 显示dialog
@@ -26,6 +33,6 @@ public interface BaseView {
 
     open  fun onSuccessData(type: String?, data: String?)
 
-
+    open  fun onSuccessAnyData(type: String?, data: HttpResponseData<ArrayList<City>>)
 
 }

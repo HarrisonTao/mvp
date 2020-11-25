@@ -12,11 +12,14 @@ import java.net.ConnectException
 import java.net.UnknownHostException
 import java.text.ParseException
 
-abstract class BaseObserver<T> constructor(view:BaseView): DisposableObserver<T>() {
+abstract class BaseObserver<T>(view: BaseView) : DisposableObserver<T>() {
 
-    lateinit  var view:BaseView
+      var view:BaseView
 
 
+    init {
+        this.view=view;
+    }
 
     /**
      * 解析数据失败
@@ -41,22 +44,18 @@ abstract class BaseObserver<T> constructor(view:BaseView): DisposableObserver<T>
     var isOpen = true
 
 
-    init {
-        this.view=view;
-    }
-
-    constructor(view: BaseView,isOpen:Boolean):this(view){
-        this.isOpen=isOpen;
 
 
-    }
+
 
     override fun onStart() {
         super.onStart()
         if(!isOpen){
             return;
         }
-        view.showLoading()
+
+            view.showLoading()
+
 
     }
 
@@ -70,13 +69,13 @@ abstract class BaseObserver<T> constructor(view:BaseView): DisposableObserver<T>
             return;
         }
 
-        view.hideLoading()
+        view .hideLoading()
 
     }
 
     override fun onError(e: Throwable) {
         if (view != null) {
-            view.hideLoading()
+            view .hideLoading()
         }
         if (e is HttpException) {
             //   HTTP错误
@@ -97,9 +96,9 @@ abstract class BaseObserver<T> constructor(view:BaseView): DisposableObserver<T>
             onException(PARSE_ERROR)
         } else {
             if (e != null) {
-                view.showError(e.toString())
+                view .showError(e.toString())
             } else {
-                view.showError("未知错误")
+                view .showError("未知错误")
             }
         }
     }
@@ -107,11 +106,10 @@ abstract class BaseObserver<T> constructor(view:BaseView): DisposableObserver<T>
 
      open fun onException(unknownError: Int) {
         when (unknownError) {
-            CONNECT_ERROR -> view.showError("连接错误")
-            CONNECT_TIMEOUT -> view.showError("连接超时")
-            BAD_NETWORK -> view.showError("网络问题")
-            PARSE_ERROR -> view.showError("解析数据失败")
-
+            CONNECT_ERROR -> view .showError("连接错误")
+            CONNECT_TIMEOUT -> view .showError("连接超时")
+            BAD_NETWORK -> view .showError("网络问题")
+            PARSE_ERROR -> view .showError("解析数据失败")
         }
     }
 

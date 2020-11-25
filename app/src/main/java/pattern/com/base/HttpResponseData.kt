@@ -6,13 +6,23 @@ package pattern.com.base
  * 响应请求类
  */
 class HttpResponseData<T> {
-    //返回状态
-    var code:Int=0
 
-    //返回信息
-     lateinit  var  message:String
+    /**
+     * header : {"code":"0000","message":"操作成功"}
+     * data : [{"cityName":"百色市","cityCode":"451000","py":"B"}]
+     */
+    var header: HeaderBean? = null
+    var data: T? = null
 
-    //返回数据
-    var data:T?=null
+
+    class HeaderBean {
+        /**
+         * code : 0000
+         * message : 操作成功
+         */
+         val code: String? = null
+         val message: String? = null
+    }
+
 
 }
