@@ -3,6 +3,7 @@ package pattern.com.observer
 import com.google.gson.JsonParseException
 import io.reactivex.observers.DisposableObserver
 import org.json.JSONException
+import pattern.com.base.HttpResponseData
 
 import pattern.com.view.BaseView
 import retrofit2.HttpException
@@ -132,7 +133,8 @@ abstract class AnyBaseObserver<T> constructor(view:BaseView): DisposableObserver
      * the item emitted by the Observable
      */
     override fun onNext(t: T) {
-
+        var data: T =t
+        
             onSuccess(t)
     }
 
