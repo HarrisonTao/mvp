@@ -57,7 +57,7 @@ public  class  BasePresenter<V : BaseView> constructor(view:V){
 
 
     fun getCityCodeInfo2(map:HashMap<String,Any>){
-        var httpService=HttpService().initService()
+        var httpService=HttpService().getOkHttpClientService()
         httpService.getCityInfo(map)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

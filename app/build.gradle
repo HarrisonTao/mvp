@@ -65,4 +65,7 @@ dependencies {
     //json工具
     implementation 'com.google.code.gson:gson:2.8.6'
 
+    //拍照架构
+    // implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
+
 }

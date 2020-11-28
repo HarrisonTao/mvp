@@ -1,5 +1,6 @@
 package pattern.com.observer
 
+import android.util.Log
 import com.google.gson.JsonParseException
 import io.reactivex.observers.DisposableObserver
 import org.json.JSONException
@@ -110,6 +111,7 @@ abstract class AnyBaseObserver<T> constructor(view:BaseView): DisposableObserver
         } else {
             if (e != null) {
                 view .showError(e.toString())
+
             } else {
                 view .showError("未知错误")
             }
@@ -123,18 +125,16 @@ abstract class AnyBaseObserver<T> constructor(view:BaseView): DisposableObserver
             CONNECT_TIMEOUT ->  view .showError("连接超时")
             BAD_NETWORK ->  view .showError("网络问题")
             PARSE_ERROR ->  view .showError("解析数据失败")
-
         }
     }
 
     /**
-
      * @param t
      * the item emitted by the Observable
      */
     override fun onNext(t: T) {
         var data: T =t
-        
+
             onSuccess(t)
     }
 

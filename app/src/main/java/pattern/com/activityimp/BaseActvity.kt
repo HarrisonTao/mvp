@@ -3,6 +3,7 @@ package pattern.com.activityimp
 import android.app.Activity
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import pattern.com.base.HttpResponseData
 import pattern.com.presenter.BasePresenter
@@ -15,7 +16,7 @@ abstract class BaseActvity<P:BasePresenter<BaseView>>() : Activity() , BaseView 
 
     lateinit var presenter: P
 
-   lateinit var toast: Toast
+
     //布局文件
    abstract var loader_layout_Id:Int
 
@@ -54,10 +55,11 @@ abstract class BaseActvity<P:BasePresenter<BaseView>>() : Activity() , BaseView 
      * 错误提示框
      */
     override  fun showError(msg: String?){
-        if (toast == null) {
-            toast = Toast.makeText(applicationContext, msg, Toast.LENGTH_LONG)
-        }
-        toast.show()
+        Log.d("异常",msg)
+        var toast:Toast = Toast.makeText(applicationContext, msg, Toast.LENGTH_LONG)
+
+        toast!!.show()
+
     }
 
 

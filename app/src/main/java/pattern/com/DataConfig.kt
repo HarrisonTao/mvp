@@ -8,5 +8,5 @@ val isOpenLog=true
 val TGM = "zyt"
 
 //服务器地址 http://106.15.225.78:17015/OwnerApp/usermgt.do?act=getCityInfo
-  val BASE_SERVER_URL:String="http://106.15.225.78:17015/OwnerApp/"
+  val BASE_SERVER_URL:String="https://106.15.225.78:17015/OwnerApp/"
 
